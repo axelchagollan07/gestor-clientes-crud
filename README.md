@@ -1,100 +1,113 @@
-# Gestor de Clientes
-### Full Stack CRUD Application
+# 👥 Gestor de Clientes
+### Prueba técnica · Desarrollo Full Stack
 
-Aplicación web full stack para la gestión de clientes, desarrollada como prueba técnica para **Miva, parte de Muebles América**. Implementa las operaciones CRUD (*Create, Read, Update, Delete*) mediante una API REST y una interfaz web reactiva, con persistencia en SQLite, validación de datos y separación de responsabilidades entre frontend y backend.
+Aplicación web para la gestión de clientes mediante operaciones CRUD (*Crear, Consultar, Actualizar y Eliminar*), desarrollada como prueba técnica para **Miva, parte de Muebles América**.
 
-El proyecto prioriza una arquitectura modular, decisiones técnicas pragmáticas y una configuración sencilla de desarrollo, de acuerdo con los objetivos de la prueba.
+La solución combina una API REST con una interfaz web reactiva, persistencia en SQLite y validación de datos en ambas capas. La arquitectura prioriza la separación de responsabilidades, la claridad del código y una configuración sencilla para ejecutar el proyecto localmente.
 
-<p align="left">
-  <img src="https://img.shields.io/badge/Node.js-TypeScript-339933?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js and TypeScript" />
-  <img src="https://img.shields.io/badge/Express.js-API-000000?style=flat-square&logo=express&logoColor=white" alt="Express.js" />
-  <img src="https://img.shields.io/badge/Prisma-ORM-2D3748?style=flat-square&logo=prisma&logoColor=white" alt="Prisma ORM" />
-  <img src="https://img.shields.io/badge/SQLite-Database-003B57?style=flat-square&logo=sqlite&logoColor=white" alt="SQLite" />
-  <img src="https://img.shields.io/badge/Vue.js-3-42B883?style=flat-square&logo=vuedotjs&logoColor=white" alt="Vue.js 3" />
-  <img src="https://img.shields.io/badge/TypeScript-Frontend-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Vite-Frontend%20Tooling-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite" />
+<p align="center">
+  <img src="https://img.shields.io/badge/Estado-Prueba%20t%C3%A9cnica-2563EB?style=for-the-badge" alt="Prueba técnica" />
+  <img src="https://img.shields.io/badge/Frontend-Vue%203-42B883?style=for-the-badge&logo=vuedotjs&logoColor=white" alt="Vue 3" />
+  <img src="https://img.shields.io/badge/Backend-Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Lenguaje-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
 </p>
 
 ---
 
-## Table of contents
+## 📌 Contenido
 
-- [Features](#features)
-- [Technology stack](#technology-stack)
-- [Architecture](#architecture)
-- [Prerequisites](#prerequisites)
-- [Installation and setup](#installation-and-setup)
-- [Data model and database mapping](#data-model-and-database-mapping)
-- [REST API](#rest-api)
-- [Validation and error handling](#validation-and-error-handling)
-- [Technical decisions](#technical-decisions)
-- [Project structure](#project-structure)
-- [Author](#author)
+- [Funcionalidades](#-funcionalidades)
+- [Tecnologías](#-tecnologías)
+- [Arquitectura](#️-arquitectura)
+- [Requisitos previos](#️-requisitos-previos)
+- [Instalación y ejecución](#-instalación-y-ejecución)
+- [Modelo de datos](#️-modelo-de-datos)
+- [API REST](#-api-rest)
+- [Validación y manejo de errores](#-validación-y-manejo-de-errores)
+- [Decisiones técnicas](#-decisiones-técnicas)
+- [Estructura del proyecto](#-estructura-del-proyecto)
+- [Autor](#-autor)
 
-## Features
+## ✨ Funcionalidades
 
-- **Client listing:** retrieve and display registered clients.
-- **Client creation:** register clients with required fields and email validation.
-- **Client editing:** update the information of an existing client.
-- **Client deletion:** remove a client with a confirmation step.
-- **Client search:** filter clients by full name, email address, or company.
-- **Data validation:** validate input in the frontend and enforce validation rules in the backend.
-- **Duplicate email prevention:** enforce email uniqueness through the database schema and handle conflicts appropriately.
-- **Persistent storage:** store client records in a local SQLite database.
-- **Centralized error handling:** maintain consistent error responses across the API.
+| Funcionalidad | Descripción |
+|:--|:--|
+| 📋 **Consulta** | Visualización de los clientes registrados. |
+| ➕ **Registro** | Alta de clientes con validación de campos obligatorios. |
+| ✏️ **Actualización** | Edición de la información de clientes existentes. |
+| 🗑️ **Eliminación** | Eliminación de registros con confirmación previa. |
+| 🔎 **Búsqueda** | Filtrado por nombre completo, correo electrónico o empresa. |
+| 🛡️ **Validación** | Validación de datos en el frontend y el backend. |
+| 📧 **Integridad** | Restricción de correos electrónicos duplicados. |
+| 💾 **Persistencia** | Almacenamiento de información en una base de datos SQLite. |
+| ⚠️ **Manejo de errores** | Tratamiento centralizado de errores de validación y persistencia. |
 
-## Technology stack
+## 🧰 Tecnologías
 
-| Layer | Technology | Purpose |
-|:--|:--|:--|
-| Runtime | Node.js | JavaScript execution environment |
-| Backend language | TypeScript | Static typing and maintainability |
-| API framework | Express.js | HTTP routing and middleware |
-| ORM | Prisma | Database access, schema definition and migrations |
-| Database | SQLite | Local relational persistence |
-| Validation | Zod | Runtime validation of incoming data |
-| Frontend framework | Vue 3 | Reactive user interface |
-| Frontend language | TypeScript | Typed components and data contracts |
-| Build tooling | Vite | Development server and production builds |
-| HTTP client | Axios | Communication with the backend |
+<details open>
+<summary><strong>Frontend · Interfaz de usuario</strong></summary>
 
-## Architecture
+| Tecnología | Uso |
+|:--|:--|
+| Vue 3 | Construcción de interfaces reactivas. |
+| Composition API | Organización de la lógica de los componentes. |
+| TypeScript | Tipado estático y mayor claridad en el código. |
+| Vite | Servidor de desarrollo y compilación. |
+| Axios | Comunicación HTTP con la API. |
 
-The application separates the user interface, HTTP communication, business logic and data persistence. Each layer has a focused responsibility, making the code easier to understand, test and extend.
+</details>
+
+<details open>
+<summary><strong>Backend · API y persistencia</strong></summary>
+
+| Tecnología | Uso |
+|:--|:--|
+| Node.js | Entorno de ejecución. |
+| TypeScript | Desarrollo tipado del servidor. |
+| Express.js | Enrutamiento y middleware HTTP. |
+| Prisma ORM | Acceso a datos y gestión de migraciones. |
+| SQLite | Base de datos relacional local. |
+| Zod | Validación de datos recibidos por la API. |
+
+</details>
+
+## 🏗️ Arquitectura
+
+El proyecto separa la interfaz, el procesamiento de solicitudes, la lógica de negocio y la persistencia. Esta organización permite mantener cada responsabilidad en su capa correspondiente, sin introducir complejidad innecesaria para el alcance de la prueba.
 
 ```mermaid
 flowchart TD
-    U["User"] --> FE["Vue 3 + TypeScript"]
-    FE --> AX["Axios"]
-    AX --> API["Express REST API"]
-    API --> VAL["Zod Validation"]
-    VAL --> CTRL["Controllers"]
-    CTRL --> SVC["Services"]
+    U["👤 Usuario"] --> FE["Frontend · Vue 3"]
+    FE --> AX["Axios · HTTP"]
+    AX --> API["API REST · Express"]
+    API --> VAL["Validación · Zod"]
+    VAL --> CTRL["Controladores"]
+    CTRL --> SVC["Servicios"]
     SVC --> ORM["Prisma ORM"]
-    ORM --> DB[("SQLite Database")]
+    ORM --> DB[("SQLite")]
 
-    API -.-> ERR["Centralized Error Middleware"]
+    API -.-> ERR["Middleware de errores"]
     CTRL -.-> ERR
     SVC -.-> ERR
 
-    style FE fill:#E1F5E9,stroke:#42B883,color:#173D2A
-    style API fill:#E8F0FE,stroke:#4285F4,color:#17365D
+    style FE fill:#E8F5EE,stroke:#42B883,color:#173D2A
+    style API fill:#E8EEFF,stroke:#356AE6,color:#18336B
     style DB fill:#FFF3D6,stroke:#D97706,color:#663C00
     style ERR fill:#FCE8E6,stroke:#D93025,color:#7A1C16
 ```
 
-**Request lifecycle:** the frontend sends an HTTP request through Axios. Express routes the request to the appropriate controller, the incoming data is validated, and the service coordinates the required operation through Prisma. The API then returns a JSON response or forwards the error to the centralized error-handling middleware.
+**Flujo general:** el usuario realiza una acción desde la interfaz; Axios envía la solicitud a Express; los datos se validan y la lógica correspondiente se ejecuta mediante los servicios y Prisma. Finalmente, la API devuelve una respuesta JSON o delega el error al middleware centralizado.
 
-## Prerequisites
+## ⚙️ Requisitos previos
 
-Install the following tools before running the application:
+Antes de ejecutar el proyecto, asegúrate de contar con:
 
-- **Node.js:** version 18 or later, subject to compatibility with the project's installed dependencies.
-- **npm:** included with Node.js.
-- **pnpm:** package manager for the frontend.
-- **Git:** required to clone the repository.
+- [Node.js](https://nodejs.org/) — versión compatible con las dependencias instaladas.
+- npm — incluido con Node.js.
+- [pnpm](https://pnpm.io/installation) — gestor de paquetes del frontend.
+- [Git](https://git-scm.com/) — para clonar el repositorio.
 
-Verify your environment:
+Comprueba las versiones instaladas:
 
 ```bash
 node --version
@@ -103,138 +116,132 @@ pnpm --version
 git --version
 ```
 
-If pnpm is not installed, enable it through Corepack if supported by your Node.js installation:
+Si necesitas habilitar pnpm mediante Corepack y tu instalación lo admite:
 
 ```bash
 corepack enable
 corepack prepare pnpm@latest --activate
 ```
 
-## Installation and setup
+## 🚀 Instalación y ejecución
 
-The backend and frontend run as separate processes. Keep both development servers running while using the application.
+El frontend y el backend se ejecutan por separado. Sigue los pasos en orden y mantén ambas terminales abiertas durante el uso de la aplicación.
 
-### 1. Clone the repository
+### 1. Clonar el repositorio
 
 ```bash
-git clone <REPOSITORY_URL>
+git clone <URL_DEL_REPOSITORIO>
 cd gestor-clientes
 ```
 
-Replace `<REPOSITORY_URL>` with the actual repository URL.
+Sustituye `<URL_DEL_REPOSITORIO>` por la dirección real del repositorio.
 
-### 2. Configure the backend
+### 2. Configurar el backend
 
-Navigate to the backend directory and install its dependencies:
+Desde la raíz del proyecto, accede a la carpeta del servidor:
 
 ```bash
 cd server
 npm install
 ```
 
-Create a `.env` file inside `server/` with the following configuration:
+Crea el archivo `server/.env` con la siguiente configuración:
 
 ```env
 DATABASE_URL="file:./dev.db"
 PORT=3000
 ```
 
-The database URL configures SQLite. Its relative path must match the database location expected by the Prisma schema.
+#### Inicializar la base de datos
 
-#### Initialize the database
-
-Generate the Prisma Client and apply the initial migration:
+Genera el cliente de Prisma y aplica las migraciones:
 
 ```bash
 npx prisma generate
 npx prisma migrate dev --name init
 ```
 
-These commands generate the database client and create or update the SQLite database according to the migration history.
+La primera instrucción genera el cliente de acceso a datos. La segunda aplica la migración inicial y prepara el esquema de SQLite según la configuración del proyecto.
 
-**Start the backend:**
+> Si el repositorio ya contiene una migración inicial, puedes conservar el nombre de esa migración en lugar de crear otra innecesariamente.
+
+#### Iniciar el servidor
 
 ```bash
 npm run dev
 ```
 
-The API should now be available at:
+El backend estará disponible en:
 
 `http://localhost:3000`
 
-> The commands above assume that the backend defines a `dev` script and uses the conventional Prisma development migration workflow. Run the commands from the `server/` directory.
+### 3. Configurar el frontend
 
-### 3. Configure the frontend
-
-Open a second terminal and navigate to the frontend directory from the project root:
+Abre una segunda terminal y accede a la carpeta del cliente:
 
 ```bash
 cd client
 pnpm install
 ```
 
-Create a `.env` file inside `client/`:
+Crea el archivo `client/.env`:
 
 ```env
 VITE_API_URL=http://localhost:3000
 ```
 
-This variable defines the base URL used by the frontend to communicate with the API.
+Esta variable establece la dirección base de la API utilizada por Axios.
 
-**Start the frontend:**
+Inicia el servidor de desarrollo:
 
 ```bash
 pnpm run dev
 ```
 
-Vite will display the local URL in the terminal. The default is:
+Por defecto, Vite sirve la aplicación en:
 
 `http://localhost:5173`
 
-### 4. Run the application
+### 4. Verificar el funcionamiento
 
-Open the frontend URL in your browser while both development servers are running.
+Abre la dirección del frontend en tu navegador y comprueba los siguientes escenarios:
 
-Verify the main workflows:
+- Consultar los clientes registrados.
+- Crear un cliente con información válida.
+- Intentar enviar un formulario incompleto o un correo inválido.
+- Editar la información de un cliente.
+- Buscar por nombre, correo electrónico o empresa.
+- Eliminar un registro y confirmar la acción.
+- Intentar registrar un correo electrónico que ya exista.
 
-1. View the registered clients.
-2. Create a client using the required fields.
-3. Attempt to submit invalid or incomplete information and verify the validation feedback.
-4. Edit an existing client's information.
-5. Search for clients by name, email or company.
-6. Delete a client after confirming the action.
-7. Verify that duplicate email addresses are rejected.
+### 🧩 Solución de problemas frecuentes
 
-### Troubleshooting
-
-| Issue | Recommended action |
+| Problema | Qué revisar |
 |:--|:--|
-| `pnpm` is not recognized | Install or activate pnpm, then reopen the terminal. |
-| Database connection error | Check `DATABASE_URL` and the database path in `schema.prisma`. |
-| Prisma Client generation error | Run `npx prisma generate` from `server/`. |
-| Database table does not exist | Run `npx prisma migrate dev --name init` from `server/`. |
-| Frontend cannot reach the API | Verify the backend is running and check `VITE_API_URL`. |
-| Port already in use | Stop the process using the port or configure an available port. |
+| `pnpm` no se reconoce | Instala o activa pnpm y reinicia la terminal. |
+| Error de conexión con SQLite | Revisa `DATABASE_URL` y la ruta definida en Prisma. |
+| Error al generar Prisma Client | Ejecuta `npx prisma generate` desde `server/`. |
+| No existe la tabla `clientes` | Comprueba que las migraciones estén presentes y ejecutadas. |
+| El frontend no conecta con la API | Verifica `VITE_API_URL` y que el backend esté activo. |
+| El puerto está ocupado | Libera el puerto o configura uno diferente. |
 
-## Data model and database mapping
+## 🗄️ Modelo de datos
 
-The application uses Prisma to define the `Cliente` entity and map it to a relational table in SQLite.
+La entidad `Cliente` representa la información de contacto y empresa de cada registro.
 
-The model contains the following fields:
-
-| Prisma field | SQLite column | Type | Constraints |
+| Campo en Prisma | Columna en SQLite | Tipo | Restricciones |
 |:--|:--|:--|:--|
-| `id` | `id` | String | UUID generated automatically; primary key |
-| `nombreCompleto` | `nombre_completo` | String | Required |
-| `email` | `email` | String | Required and unique |
-| `telefono` | `telefono` | String | Optional |
-| `empresa` | `empresa` | String | Required |
-| `creadoEn` | `creado_en` | DateTime | Automatically initialized |
-| `actualizadoEn` | `actualizado_en` | DateTime | Automatically updated |
+| `id` | `id` | String | UUID autogenerado, clave primaria. |
+| `nombreCompleto` | `nombre_completo` | String | Obligatorio. |
+| `email` | `email` | String | Obligatorio y único. |
+| `telefono` | `telefono` | String | Opcional. |
+| `empresa` | `empresa` | String | Obligatorio. |
+| `creadoEn` | `creado_en` | DateTime | Se inicializa automáticamente. |
+| `actualizadoEn` | `actualizado_en` | DateTime | Se actualiza mediante Prisma. |
 
-### Naming conventions: camelCase and snake_case
+### Convención de nombres: `camelCase` y `snake_case`
 
-A deliberate mapping strategy is implemented using Prisma's `@map` and `@@map` attributes.
+Se utiliza el mapeo explícito de Prisma para separar los nombres de los campos en el código de los nombres físicos de las columnas en la base de datos.
 
 ```prisma
 model Cliente {
@@ -250,33 +257,31 @@ model Cliente {
 }
 ```
 
-This configuration separates the naming conventions used by the application from those used by the database:
+**¿Qué aporta esta decisión?**
 
-- **Application layer — camelCase:** Prisma exposes fields such as `nombreCompleto`, `creadoEn` and `actualizadoEn`, following TypeScript naming conventions.
-- **Database layer — snake_case:** the corresponding SQLite columns are named `nombre_completo`, `creado_en` and `actualizado_en`.
-- **Table mapping:** `@@map("clientes")` maps the Prisma model `Cliente` to the physical SQLite table `clientes`.
-- **Uniqueness:** `@unique` enforces the uniqueness of the email column at the database level.
-- **Automatic timestamps:** `@default(now())` initializes the creation timestamp, while `@updatedAt` updates the modification timestamp through Prisma.
+- **`camelCase` en la aplicación:** permite utilizar nombres idiomáticos de TypeScript, como `nombreCompleto`, `creadoEn` y `actualizadoEn`.
+- **`snake_case` en la base de datos:** mantiene nombres de columnas consistentes, como `nombre_completo`, `creado_en` y `actualizado_en`.
+- **`@@map("clientes")`:** vincula el modelo `Cliente` con la tabla física `clientes`.
+- **`@unique`:** establece una restricción de unicidad para el correo electrónico.
+- **Fechas automáticas:** `@default(now())` inicializa la fecha de creación y `@updatedAt` actualiza la fecha de modificación mediante Prisma.
 
-**Why this matters:** the mapping preserves readable, idiomatic TypeScript without compromising a consistent database naming convention. It also avoids requiring application code to use database-oriented field names everywhere.
+El mapeo evita propagar convenciones propias de la base de datos a toda la aplicación y mantiene clara la separación entre el modelo de datos utilizado en TypeScript y su representación en SQLite.
 
-The mapping does not rename the fields exposed by Prisma Client. It defines how Prisma translates model and field names into the corresponding physical database names.
+## 🔌 API REST
 
-## REST API
+La API expone las siguientes operaciones para administrar los clientes:
 
-The backend exposes a REST API for managing clients.
-
-| Method | Endpoint | Description |
+| Método | Endpoint | Descripción |
 |:--|:--|:--|
-| `GET` | `/api/clientes` | Retrieve the list of clients |
-| `GET` | `/api/clientes/:id` | Retrieve a client by ID |
-| `POST` | `/api/clientes` | Create a new client |
-| `PUT` | `/api/clientes/:id` | Update an existing client |
-| `DELETE` | `/api/clientes/:id` | Delete a client |
+| `GET` | `/api/clientes` | Consultar todos los clientes. |
+| `GET` | `/api/clientes/:id` | Consultar un cliente por su identificador. |
+| `POST` | `/api/clientes` | Crear un nuevo cliente. |
+| `PUT` | `/api/clientes/:id` | Actualizar un cliente existente. |
+| `DELETE` | `/api/clientes/:id` | Eliminar un cliente. |
 
-### Example: create a client
+### Ejemplo de creación
 
-**Request**
+**Solicitud**
 
 ```http
 POST /api/clientes
@@ -292,9 +297,7 @@ Content-Type: application/json
 }
 ```
 
-The request uses the application-facing field names. Prisma maps the relevant fields to their corresponding SQLite columns when persisting the record.
-
-**Example response**
+**Ejemplo de respuesta**
 
 ```json
 {
@@ -308,88 +311,85 @@ The request uses the application-facing field names. Prisma maps the relevant fi
 }
 ```
 
-*The response is illustrative. The actual response body and HTTP status codes depend on the implemented controller and serialization logic.*
+*Los datos de la respuesta son ilustrativos. El cuerpo definitivo y el código HTTP dependen de la implementación de la API.*
 
-## Validation and error handling
+## 🛡️ Validación y manejo de errores
 
-The application uses complementary validation mechanisms to protect data integrity and improve the user experience.
+La validación se realiza en dos niveles complementarios.
 
-### Frontend validation
+**Frontend**
 
-- Checks required fields before submitting a form.
-- Validates the email format.
-- Provides feedback when the input is invalid.
-- Helps prevent unnecessary requests to the backend.
+- Comprueba los campos obligatorios antes de enviar el formulario.
+- Valida el formato del correo electrónico.
+- Proporciona retroalimentación inmediata al usuario.
 
-### Backend validation
+**Backend**
 
-- Validates incoming data using Zod.
-- Rejects invalid payloads independently of frontend validation.
-- Handles database constraints, including duplicate email addresses.
-- Uses centralized error handling to keep HTTP error responses consistent.
+- Valida los datos recibidos mediante Zod.
+- No depende de las validaciones ejecutadas en el navegador.
+- Gestiona las restricciones de persistencia, como los correos duplicados.
+- Centraliza el tratamiento de errores para mantener respuestas consistentes.
 
-Frontend validation is primarily a usability feature; backend validation is necessary because clients can send requests without using the interface.
+La validación del cliente mejora la experiencia de uso; la validación del servidor protege la integridad de los datos incluso cuando las solicitudes se realizan fuera de la interfaz.
 
-## Technical decisions
+## 🧠 Decisiones técnicas
 
-### 1. Modular backend architecture
+### 1. Arquitectura modular
 
-The backend organizes functionality by domain, with the client-management module grouping the relevant routes, controllers, services and validation schemas.
+Las funcionalidades relacionadas con clientes se agrupan en un módulo específico. Esto facilita localizar el código, mantener cada responsabilidad y añadir futuras funcionalidades sin concentrar toda la lógica en un único archivo.
 
-This keeps related functionality together and makes the codebase easier to extend without introducing unnecessary architectural layers.
+### 2. Separación de responsabilidades
 
-### 2. Separation of concerns
+Los controladores gestionan el contexto HTTP, mientras que los servicios concentran la lógica de negocio y coordinan las operaciones de datos mediante Prisma. Esta separación facilita el mantenimiento y permite probar las responsabilidades de forma más aislada.
 
-Controllers handle HTTP-specific responsibilities, while services encapsulate business logic and coordinate data operations through Prisma.
+### 3. Validación en ambas capas
 
-This separation improves readability and makes individual responsibilities easier to test and maintain.
+El frontend valida antes de enviar los datos para mejorar la experiencia de uso. El backend vuelve a validar las solicitudes mediante Zod porque no debe confiar en la información recibida del cliente.
 
-### 3. Validation at the API boundary
+### 4. Manejo centralizado de errores
 
-Zod validates incoming data before it reaches the business logic. The frontend performs complementary validation for immediate feedback, but the backend remains responsible for enforcing the rules of the API.
+Un middleware común permite tratar errores de validación, restricciones conocidas de la base de datos y fallos inesperados en un punto central. Esto reduce la duplicación de código y favorece respuestas HTTP coherentes.
 
-### 4. Centralized error handling
+### 5. Mapeo explícito de nombres en Prisma
 
-A shared error-handling middleware provides a consistent place to translate validation errors, known database errors and unexpected failures into appropriate HTTP responses.
+Las directivas `@map` y `@@map` permiten mantener `camelCase` en el código y `snake_case` en SQLite. Esta solución resuelve la diferencia entre convenciones sin añadir transformaciones manuales en cada operación.
 
-This avoids scattering error-handling logic throughout individual controllers and routes.
+### 6. Composables de Vue 3
 
-### 5. Prisma field and table mapping
+Los composables encapsulan lógica reactiva reutilizable, como la administración de clientes y las notificaciones. Para el alcance de esta prueba, este enfoque evita incorporar una librería de estado global si no resulta necesaria.
 
-The `@map` and `@@map` attributes explicitly separate application naming from database naming. This preserves camelCase in the TypeScript layer and snake_case in SQLite, making the conventions clear without adding manual mapping logic throughout the application.
+### 7. SQLite y configuración sencilla
 
-### 6. Composables instead of a global state library
+SQLite cumple el requisito de utilizar una base de datos local sin depender de servicios externos. Prisma gestiona el acceso a los datos y las migraciones, lo que facilita reproducir el entorno de desarrollo.
 
-Vue 3 composables encapsulate reusable reactive logic, such as client operations and notifications. For the scope of this application, this approach avoids the additional configuration and dependencies of a global state-management library.
+**Criterio general:** priorizar una solución clara, mantenible y suficiente para los requisitos de la prueba, evitando complejidad arquitectónica que no aporte valor al alcance actual.
 
-### 7. SQLite for straightforward setup
-
-SQLite satisfies the database requirement without requiring a separate database server or container. Prisma manages database access and migrations, keeping the development environment straightforward and reproducible.
-
-The chosen solution focuses on the requirements of the exercise rather than introducing infrastructure that would not provide meaningful value at this stage.
-
-## Project structure
+## 📁 Estructura del proyecto
 
 ```text
 gestor-clientes/
-├── server/
+│
+├── server/                         # API REST
 │   ├── prisma/
-│   │   ├── migrations/
-│   │   └── schema.prisma
+│   │   ├── migrations/              # Historial de migraciones
+│   │   └── schema.prisma            # Modelo y configuración de datos
+│   │
 │   ├── src/
 │   │   ├── modules/
-│   │   │   └── clientes/
-│   │   ├── middlewares/
-│   │   └── utils/
+│   │   │   └── clientes/            # Funcionalidad de clientes
+│   │   ├── middlewares/             # Middleware compartido
+│   │   └── utils/                   # Utilidades generales
+│   │
 │   ├── .env.example
 │   └── package.json
 │
-├── client/
+├── client/                          # Interfaz web
 │   ├── src/
-│   │   ├── components/
-│   │   ├── composables/
-│   │   ├── services/
-│   │   └── types/
+│   │   ├── components/              # Componentes reutilizables
+│   │   ├── composables/             # Lógica reactiva compartida
+│   │   ├── services/                # Comunicación con la API
+│   │   └── types/                   # Tipos de TypeScript
+│   │
 │   ├── .env.example
 │   └── package.json
 │
@@ -397,11 +397,11 @@ gestor-clientes/
 └── README.md
 ```
 
-*This tree summarizes the intended organization. Retain only directories and files that exist in the submitted repository.*
+*La estructura es ilustrativa: conserva únicamente los directorios y archivos que existan en la versión entregada.*
 
-## Environment configuration
+## 🔐 Variables de entorno
 
-Commit example environment files, not machine-specific `.env` files.
+Incluye archivos de ejemplo para documentar la configuración necesaria sin exponer datos locales.
 
 **`server/.env.example`**
 
@@ -416,18 +416,20 @@ PORT=3000
 VITE_API_URL=http://localhost:3000
 ```
 
-Ensure that `.gitignore` excludes actual environment files, generated dependencies and local database files where appropriate. The migration files should remain in version control so another developer can reproduce the database schema.
+Los archivos `.env` reales deben excluirse del repositorio mediante `.gitignore`. Conserva las migraciones de Prisma en el control de versiones para que otros desarrolladores puedan reproducir el esquema de la base de datos.
 
-## Author
+## 👨‍💻 Autor
 
 **Axel Emmanuel Chagollán Corona**
 
-Computer Science Engineer · Full Stack Developer
+Ingeniero en Computación · Desarrollador de Software
 
-Developed as a technical assessment for **Miva, part of Muebles América**.
+Proyecto desarrollado como prueba técnica para **Miva, parte de Muebles América**.
 
-[GitHub — axelchagollan07](https://github.com/axelchagollan07)
+[![GitHub](https://img.shields.io/badge/GitHub-axelchagollan07-181717?style=for-the-badge&logo=github)](https://github.com/axelchagollan07)
 
 ---
 
-<sub>Built with Vue 3, TypeScript, Node.js, Express, Prisma and SQLite.</sub>
+<p align="center">
+  <sub>Desarrollado con Vue 3 · TypeScript · Node.js · Express · Prisma · SQLite</sub>
+</p>
