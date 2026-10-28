@@ -130,7 +130,7 @@ El frontend y el backend se ejecutan por separado. Sigue los pasos en orden y ma
 ### 1. Clonar el repositorio
 
 ```bash
-git clone <URL_DEL_REPOSITORIO>
+git clone https://github.com/axelchagollan07/gestor-clientes-crud
 cd gestor-clientes
 ```
 
