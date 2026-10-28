@@ -1,0 +1,220 @@
+/* ============================================
+   SISTEMA DE DISEÑO — Design Tokens
+   ============================================ */
+:root {
+  /* Paleta de color — Slate oscuro azulado (no negro puro) */
+  --bg-principal: #0d1321;
+  --bg-superficie: #141b2d;
+  --bg-tarjeta: #1a2236;
+  --bg-tarjeta-hover: #202a42;
+  --bg-input: #0f1627;
+
+  --borde: #2a3650;
+  --borde-fuerte: #3a4868;
+
+  --texto-principal: #eef2f8;
+  --texto-secundario: #8b96ac;
+  --texto-terciario: #5b6681;
+
+  /* Acento (marca) — Azul vibrante con gradiente */
+  --acento: #4f7cff;
+  --acento-hover: #3d67e8;
+  --acento-suave: rgba(79, 124, 255, 0.12);
+  --gradiente-acento: linear-gradient(135deg, #4f7cff 0%, #7c5cff 100%);
+
+  /* Semánticos */
+  --exito: #22c55e;
+  --exito-suave: rgba(34, 197, 94, 0.12);
+  --error: #f0505b;
+  --error-suave: rgba(240, 80, 91, 0.12);
+  --advertencia: #f5a524;
+  --advertencia-suave: rgba(245, 165, 36, 0.12);
+
+  /* Escala de espaciado (base 4px) */
+  --e-1: 4px;
+  --e-2: 8px;
+  --e-3: 12px;
+  --e-4: 16px;
+  --e-5: 20px;
+  --e-6: 24px;
+  --e-8: 32px;
+  --e-10: 40px;
+
+  /* Radios */
+  --radio-sm: 8px;
+  --radio: 12px;
+  --radio-lg: 18px;
+  --radio-full: 999px;
+
+  /* Elevación (sombras por capas) */
+  --sombra-1: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --sombra-2: 0 4px 14px rgba(0, 0, 0, 0.35);
+  --sombra-3: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --sombra-acento: 0 8px 20px rgba(79, 124, 255, 0.25);
+
+  /* Transiciones */
+  --rapida: 0.15s ease;
+  --normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   RESET Y BASE
+   ============================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-principal);
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(79, 124, 255, 0.07) 0%, transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(124, 92, 255, 0.05) 0%, transparent 40%);
+  background-attachment: fixed;
+  color: var(--texto-principal);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radio-sm);
+  transition: background-color var(--rapida), transform var(--rapida), box-shadow var(--rapida), border-color var(--rapida);
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+input, textarea {
+  font-family: inherit;
+  font-size: 0.95rem;
+  background-color: var(--bg-input);
+  border: 1.5px solid var(--borde);
+  color: var(--texto-principal);
+  border-radius: var(--radio-sm);
+  padding: 11px 14px;
+  outline: none;
+  width: 100%;
+  transition: border-color var(--rapida), box-shadow var(--rapida);
+}
+
+input::placeholder {
+  color: var(--texto-terciario);
+}
+
+input:focus, textarea:focus {
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px var(--acento-suave);
+}
+
+/* Accesibilidad: anillo de foco visible al navegar con teclado */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+.contenedor {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: var(--e-8) var(--e-5) 60px;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--borde-fuerte);
+  border-radius: var(--radio-full);
+  border: 2px solid var(--bg-principal);
+}
+
+/* ============================================
+   UTILIDADES COMPARTIDAS (botones, badges)
+   ============================================ */
+.boton-primario {
+  background: var(--gradiente-acento);
+  color: white;
+  padding: 11px 20px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--sombra-acento);
+}
+.boton-primario:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 10px 26px rgba(79, 124, 255, 0.35);
+}
+
+.boton-secundario {
+  background-color: transparent;
+  color: var(--texto-secundario);
+  padding: 10px 18px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: 1.5px solid var(--borde) !important;
+}
+.boton-secundario:hover {
+  background-color: var(--bg-tarjeta-hover);
+  color: var(--texto-principal);
+  border-color: var(--borde-fuerte) !important;
+}
+
+.boton-peligro {
+  background-color: var(--error);
+  color: white;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.boton-peligro:hover {
+  background-color: #d43e49;
+  box-shadow: 0 8px 20px rgba(240, 80, 91, 0.3);
+}
+
+.icono {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* Animación de entrada genérica */
+@keyframes aparecer-arriba {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes aparecer-modal {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
